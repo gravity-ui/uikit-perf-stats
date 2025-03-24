@@ -1,0 +1,59 @@
+{
+  "name": "gravity-ui-perf",
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "dev": "node ./scripts/dev.js dev"
+  },
+  "dependencies": {
+    "@adobe/react-spectrum": "^3.40.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@gravity-ui/icons": "^2.13.0",
+    "@gravity-ui/navigation": "^3.1.1",
+    "@gravity-ui/uikit": "^7.4.0",
+    "@inquirer/prompts": "^7.4.0",
+    "@mui/material": "^6.4.8",
+    "antd": "^5.24.4",
+    "bem-cn-lite": "^4.1.0",
+    "commander": "^13.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@gravity-ui/browserslist-config": "^4.1.0",
+    "@gravity-ui/eslint-config": "^3.1.1",
+    "@gravity-ui/prettier-config": "^1.1.0",
+    "@gravity-ui/stylelint-config": "^4.0.0",
+    "@gravity-ui/tsconfig": "^1.0.0",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@vitejs/plugin-react": "^4.2.0",
+    "esbuild-sass-plugin": "^2.16.0",
+    "eslint": "^8.53.0",
+    "husky": "^8.0.3",
+    "sass": "^1.68.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0",
+    "vite-plugin-svgr": "^4.2.0"
+  },
+  "browserslist": [
+    "extends @gravity-ui/browserslist-config"
+  ],
+  "lint-staged": {
+    "*.{scss}": [
+      "stylelint --fix --quiet"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix --quiet",
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
+  }
+}
