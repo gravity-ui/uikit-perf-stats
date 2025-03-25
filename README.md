@@ -1,6 +1,6 @@
 # React components performance comparison
 
-## Методоллогия
+## Methodology
 
 > [!IMPORTANT]
 > The proposed method for comparing component performance is not intended to obtain precise absolute numbers. Primarily, it aims to establish an identical environment for running code, obtaining results relative to this environment, and subsequently comparing them.
