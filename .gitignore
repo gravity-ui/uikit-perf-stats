@@ -1,31 +1,19 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
-/build
-/dist
-
-# misc
+.idea
+.vscode
+.history
 .DS_Store
-*.pem
+*.log
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+node_modules
 
-# local env files
-.env*.local
+/storybook-static
+/build
+/styles/**/*.css
 
-# typescript
-*.tsbuildinfo
+/coverage
+/playwright/.cache*
+/playwright/report*
+/playwright/test-results
 
-# tmp
-index.html
+.config
+.env

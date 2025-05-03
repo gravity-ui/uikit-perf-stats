@@ -1,58 +1,68 @@
 {
-  "name": "gravity-ui-perf",
-  "version": "0.0.0",
-  "type": "module",
-  "engines": {
-    "node": ">=18"
-  },
+  "name": "performance-comparer",
+  "version": "0.1.0",
+  "description": "A package for comparing performance of React components from different libraries",
   "scripts": {
-    "prepare": "husky install",
-    "dev": "node ./scripts/dev.js dev"
-  },
-  "dependencies": {
-    "@adobe/react-spectrum": "^3.40.1",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@gravity-ui/icons": "^2.13.0",
-    "@gravity-ui/navigation": "^3.1.1",
-    "@gravity-ui/uikit": "^7.4.0",
-    "@inquirer/prompts": "^7.4.0",
-    "@mui/material": "^6.4.8",
-    "antd": "^5.24.4",
-    "bem-cn-lite": "^4.1.0",
-    "commander": "^13.1.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:js:fix": "npm run lint:js -- --fix",
+    "lint:styles": "stylelint '**/*.{css,scss}'",
+    "lint:styles:fix": "npm run lint:styles -- --fix",
+    "lint:prettier": "prettier --check '**/*.{js,jsx,ts,tsx,json,md}'",
+    "lint:prettier:fix": "prettier --write '**/*.{js,jsx,ts,tsx,json,md}'",
+    "lint": "npm-run-all --parallel lint:*",
+    "playwright:install": "playwright install chromium webkit --with-deps",
+    "playwright": "playwright test --config=playwright/playwright.config.ts",
+    "playwright:update": "npm run playwright -- -u",
+    "playwright:clear-cache": "rm -rf ./playwright/.cache",
+    "playwright:docker": "./playwright/run-docker-command.sh npm run playwright --",
+    "playwright:docker:update": "./playwright/run-docker-command.sh npm run playwright:update --",
+    "playwright:docker:clear-cache": "./playwright/run-docker-command.sh clear-cache",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "@gravity-ui/browserslist-config": "^4.1.0",
-    "@gravity-ui/eslint-config": "^3.1.1",
+    "@adobe/react-spectrum": "^3.41.0",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@gravity-ui/eslint-config": "^4.0.1",
     "@gravity-ui/prettier-config": "^1.1.0",
-    "@gravity-ui/stylelint-config": "^4.0.0",
+    "@gravity-ui/stylelint-config": "^4.0.1",
     "@gravity-ui/tsconfig": "^1.0.0",
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@vitejs/plugin-react": "^4.2.0",
-    "esbuild-sass-plugin": "^2.16.0",
-    "eslint": "^8.53.0",
-    "husky": "^8.0.3",
-    "sass": "^1.68.0",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0",
-    "vite-plugin-svgr": "^4.2.0"
+    "@gravity-ui/uikit": "^7.10.0",
+    "@mui/material": "^7.0.2",
+    "@playwright/experimental-ct-react": "^1.52.0",
+    "@playwright/test": "^1.52.0",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.6",
+    "antd": "^5.24.9",
+    "dotenv-defaults": "^5.0.2",
+    "eslint": "^9.24.0",
+    "eslint-plugin-testing-library": "^7.1.1",
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-transform-css": "^6.0.2",
+    "nano-staged": "^0.8.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.5.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sass-embedded": "^1.87.0",
+    "stylelint": "^15.11.0",
+    "stylelint-use-logical": "^2.1.2",
+    "typescript": "^5.8.3"
   },
-  "browserslist": [
-    "extends @gravity-ui/browserslist-config"
-  ],
-  "lint-staged": {
-    "*.{scss}": [
-      "stylelint --fix --quiet"
-    ],
+  "nano-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix --quiet",
+      "eslint --fix",
       "prettier --write"
     ],
-    "*.md": [
+    "*.{css,scss}": [
+      "stylelint --fix"
+    ],
+    "*.{json,md}": [
       "prettier --write"
     ]
   }
