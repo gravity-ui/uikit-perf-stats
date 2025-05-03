@@ -1,94 +1,94 @@
 # Performance Comparer
 
-## Описание
+## Description
 
-Performance Comparer - это инструмент для измерения и сравнения производительности React-компонентов с использованием [Playwright](https://playwright.dev) и [PerformanceObserver](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver).
+Performance Comparer is a tool for measuring and comparing the performance of React components using [Playwright](https://playwright.dev) and [PerformanceObserver](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver).
 
 ## TLDR
 
-[Отчеты о производительности](#отчеты-о-производительности)
+[Performance Reports](#performance-reports)
 
-## Подход к измерению
+## Measurement Approach
 
-Основные этапы:
+Main stages:
 
-1. **Сбор метрик**
+1. **Metrics Collection**
 
-   - Используется `PerformanceObserver` для отслеживания событий `measure` (пользовательские измерения)
-   - Все метрики сохраняются в глобальном объекте `__PERFORMANCE_METRICS__`
+   - Uses `PerformanceObserver` to track `measure` events (custom measurements)
+   - All metrics are stored in the global `__PERFORMANCE_METRICS__` object
 
-2. **Измеряемые показатели**
+2. **Measured Indicators**
 
-   - Время рендеринга (мс)
-     - Среднее значение
-     - Минимальное значение
-     - Максимальное значение
-   - Количество DOM-узлов в компоненте
+   - Rendering time (ms)
+     - Average value
+     - Minimum value
+     - Maximum value
+   - Number of DOM nodes in the component
 
-3. **Процесс измерения**
-   - Тест запускается указанное количество раз
-   - Для каждого запуска:
-     - Инициализируется PerformanceObserver
-     - Выполняется рендеринг компонента
-     - Собираются все метрики
-     - Вычисляется общее время рендеринга
-   - Результаты агрегируются и сохраняются в отчет
+3. **Measurement Process**
+   - Test runs the specified number of times
+   - For each run:
+     - PerformanceObserver is initialized
+     - Component rendering is executed
+     - All metrics are collected
+     - Total rendering time is calculated
+   - Results are aggregated and saved in the report
 
-## Как использовать
+## How to Use
 
-### Требования
+### Requirements
 
 - Node.js >= 20
 - Playwright
-- Docker (для запуска в контейнере)
+- Docker (for running in container)
 
-### Конфигурация
+### Configuration
 
-Все переменные окружения должны быть определены в файле `.env`:
+All environment variables must be defined in the `.env` file:
 
 ```bash
-REPEAT_EACH=1                       # Количество повторений выполнения для каждого теста
-VITE_AVATAR_NODES_COUNT=1000        # Количество узлов для компонента Avatar
-VITE_BUTTON_NODES_COUNT=1000        # Количество узлов для компонента Button
-VITE_CHECKBOX_NODES_COUNT=1000      # Количество узлов для компонента Checkbox
-VITE_LABEL_NODES_COUNT=1000         # Количество узлов для компонента Label
-VITE_LINK_NODES_COUNT=1000          # Количество узлов для компонента Link
-VITE_NUMBER_INPUT_NODES_COUNT=1000  # Количество узлов для компонента NumberInput
-VITE_RADIO_GROUP_NODES_COUNT=1000   # Количество узлов для компонента RadioGroup
-VITE_SWITCH_NODES_COUNT=1000        # Количество узлов для компонента Switch
-VITE_TEXT_NODES_COUNT=1000          # Количество узлов для компонента Text
-VITE_TEXT_INPUT_NODES_COUNT=1000    # Количество узлов для компонента TextInput
-VITE_TEXT_AREA_NODES_COUNT=1000     # Количество узлов для компонента TextArea
+REPEAT_EACH=1                       # Number of repetitions for each test
+VITE_AVATAR_NODES_COUNT=1000        # Number of nodes for Avatar component
+VITE_BUTTON_NODES_COUNT=1000        # Number of nodes for Button component
+VITE_CHECKBOX_NODES_COUNT=1000      # Number of nodes for Checkbox component
+VITE_LABEL_NODES_COUNT=1000         # Number of nodes for Label component
+VITE_LINK_NODES_COUNT=1000          # Number of nodes for Link component
+VITE_NUMBER_INPUT_NODES_COUNT=1000  # Number of nodes for NumberInput component
+VITE_RADIO_GROUP_NODES_COUNT=1000   # Number of nodes for RadioGroup component
+VITE_SWITCH_NODES_COUNT=1000        # Number of nodes for Switch component
+VITE_TEXT_NODES_COUNT=1000          # Number of nodes for Text component
+VITE_TEXT_INPUT_NODES_COUNT=1000    # Number of nodes for TextInput component
+VITE_TEXT_AREA_NODES_COUNT=1000     # Number of nodes for TextArea component
 ```
 
-### 1. Настройка окружения
+### 1. Environment Setup
 
 ```bash
-# Установка зависимостей
+# Install dependencies
 npm run playwright:install
 
-# Очистка кэша (при необходимости, например когда меняется файл .env)
+# Clear cache (if needed, for example when .env file changes)
 npm run playwright:clear-cache
 ```
 
-### 2. Запуск тестов
+### 2. Running Tests
 
 ```bash
-# Запуск тестов локально
+# Run tests locally
 npm run playwright
 
-# Запуск тестов в Docker
+# Run tests in Docker
 npm run playwright:docker
 ```
 
-### 3. Результаты
+### 3. Results
 
-Результаты тестов будут отображены в консоли после успешного завершения тестов.
+Test results will be displayed in the console after successful test completion.
 
-## Отчеты о производительности
+## Performance Reports
 
-В отчетах представлены результаты тестирования производительности следующих UI-библиотек: [antd](https://github.com/ant-design/ant-design),[ @gravity-ui/uikit](https://github.com/gravity-ui/uikit), [@mui/material](https://github.com/mui/material-ui), [@adobe/react-spectrum](https://github.com/adobe/react-spectrum):
+The reports present performance testing results for the following UI libraries: [antd](https://github.com/ant-design/ant-design), [@gravity-ui/uikit](https://github.com/gravity-ui/uikit), [@mui/material](https://github.com/mui/material-ui), [@adobe/react-spectrum](https://github.com/adobe/react-spectrum):
 
-- [Отчет с 10 узлами](./REPORT_10.md)
-- [Отчет со 100 узлами](./REPORT_100.md)
-- [Отчет с 1000 узлами](./REPORT_1000.md)
+- [Report with 10 nodes](./REPORT_10.md)
+- [Report with 100 nodes](./REPORT_100.md)
+- [Report with 1000 nodes](./REPORT_1000.md)

@@ -1,5 +1,7 @@
 # Performance Comparison Report
 
+[← Back to README](./README.md)
+
 ## System Information
 
 | Property        | Value         |
@@ -115,3 +117,5 @@
 | @gravity-ui/uikit     | 56.82ms                                   | 51.60ms                                   | 65.80ms                                   |
 | @mui/material         | <span style="color: green">39.81ms</span> | <span style="color: green">35.30ms</span> | <span style="color: green">44.00ms</span> |
 | @adobe/react-spectrum | 83.13ms                                   | 78.30ms                                   | 97.30ms                                   |
+
+[← Back to README](./README.md)
