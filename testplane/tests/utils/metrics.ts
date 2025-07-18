@@ -19,6 +19,7 @@ interface PerformanceAnnotation {
 }
 
 export async function collectMetrics(page: WdioBrowser) {
+    performance.mark('begin-mark');
     (window as any).__PERFORMANCE_METRICS__ = [];
     const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
@@ -38,7 +39,7 @@ export async function collectMetrics(page: WdioBrowser) {
 
     return {
         finish: async () => {
-            performance.measure('total-render-time');
+            performance.measure('total-render-time', 'begin-mark');
 
             // Wait for metrics to be collected
             let metrics: PerformanceMetric[] = [];

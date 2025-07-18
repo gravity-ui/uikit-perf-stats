@@ -20,6 +20,7 @@ interface PerformanceAnnotation {
 
 export async function collectMetrics(page: Page, testInfo: TestInfo) {
     await page.evaluate(() => {
+        performance.mark('begin-mark');
         (window as any).__PERFORMANCE_METRICS__ = [];
         const observer = new PerformanceObserver((list) => {
             const entries = list.getEntries();
@@ -41,7 +42,7 @@ export async function collectMetrics(page: Page, testInfo: TestInfo) {
     return {
         finish: async () => {
             await page.evaluate(() => {
-                performance.measure('total-render-time');
+                performance.measure('total-render-time', 'begin-mark');
             });
 
             // Wait for metrics to be collected
