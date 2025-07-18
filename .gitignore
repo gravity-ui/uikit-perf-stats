@@ -14,6 +14,7 @@ node_modules
 /playwright/.cache*
 /playwright/report*
 /playwright/test-results
+playwright-report
 
 .config
 .env

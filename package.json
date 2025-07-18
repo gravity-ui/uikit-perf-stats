@@ -17,6 +17,7 @@
     "playwright:docker": "./playwright/run-docker-command.sh npm run playwright --",
     "playwright:docker:update": "./playwright/run-docker-command.sh npm run playwright:update --",
     "playwright:docker:clear-cache": "./playwright/run-docker-command.sh clear-cache",
+    "playwright:gui": "html-reporter gui --tool playwright --config=playwright/playwright.config.ts",
     "prepare": "husky",
     "testplane": "npx testplane --config=testplane/testplane.config.ts",
     "testplane:gui": "npx testplane gui --config=testplane/testplane.config.ts"
