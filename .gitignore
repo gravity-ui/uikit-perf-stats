@@ -12,7 +12,6 @@ node_modules
 
 /coverage
 /playwright/.cache*
-/playwright/report*
 /playwright/test-results
 
 .config
