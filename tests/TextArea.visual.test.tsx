@@ -3,6 +3,7 @@ import {test} from '@playwright/experimental-ct-react';
 import {AntTextArea} from '../src/libs/antd/TextArea';
 import {GravityTextArea} from '../src/libs/gravity-ui/TextArea';
 import {MaterialTextArea} from '../src/libs/mui/TextArea';
+import {PrimereactTextArea} from '../src/libs/primereact/TextArea';
 import {ReactSpectrumTextArea} from '../src/libs/react-spectrum/TextArea';
 
 import {collectMetrics} from './utils/metrics';
@@ -35,6 +36,14 @@ test('TextArea React Spectrum', async ({mount, page}, testInfo) => {
     const metrics = await collectMetrics(page, testInfo);
 
     await mount(<ReactSpectrumTextArea />);
+
+    await metrics.finish();
+});
+
+test('TextArea PrimeReact', async ({mount, page}, testInfo) => {
+    const metrics = await collectMetrics(page, testInfo);
+
+    await mount(<PrimereactTextArea />);
 
     await metrics.finish();
 });
