@@ -11,7 +11,16 @@ function pathFromRoot(p: string) {
     return resolve(__dirname, '../', p);
 }
 
-const reporterConfig: PlaywrightTestConfig['reporter'] = [['dot'], ['./reporters/custom.ts']];
+const reporterConfig: PlaywrightTestConfig['reporter'] = [
+    ['dot'],
+    [
+        'html-reporter/playwright',
+        {
+            enabled: true,
+            path: 'playwright-report',
+        },
+    ],
+];
 
 /**
  * See https://playwright.dev/docs/test-configuration.

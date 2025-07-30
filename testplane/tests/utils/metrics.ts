@@ -1,4 +1,4 @@
-import type {Page, TestInfo} from '@playwright/test';
+import type {WdioBrowser} from 'testplane';
 
 interface PerformanceMetric {
     name: string;
@@ -18,32 +18,28 @@ interface PerformanceAnnotation {
     data?: PerformanceData;
 }
 
-export async function collectMetrics(page: Page, testInfo: TestInfo) {
-    await page.evaluate(() => {
-        performance.mark('begin-mark');
-        (window as any).__PERFORMANCE_METRICS__ = [];
-        const observer = new PerformanceObserver((list) => {
-            const entries = list.getEntries();
-            const metrics = (window as any).__PERFORMANCE_METRICS__ || [];
-            entries.forEach((entry) => {
-                metrics.push({
-                    name: entry.name,
-                    entryType: entry.entryType,
-                    startTime: entry.startTime,
-                    duration: entry.duration,
-                });
+export async function collectMetrics(page: WdioBrowser) {
+    performance.mark('begin-mark');
+    (window as any).__PERFORMANCE_METRICS__ = [];
+    const observer = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        const metrics = (window as any).__PERFORMANCE_METRICS__ || [];
+        entries.forEach((entry) => {
+            metrics.push({
+                name: entry.name,
+                entryType: entry.entryType,
+                startTime: entry.startTime,
+                duration: entry.duration,
             });
-            (window as any).__PERFORMANCE_METRICS__ = metrics;
         });
-
-        observer.observe({entryTypes: ['measure']});
+        (window as any).__PERFORMANCE_METRICS__ = metrics;
     });
+
+    observer.observe({entryTypes: ['measure']});
 
     return {
         finish: async () => {
-            await page.evaluate(() => {
-                performance.measure('total-render-time', 'begin-mark');
-            });
+            performance.measure('total-render-time', 'begin-mark');
 
             // Wait for metrics to be collected
             let metrics: PerformanceMetric[] = [];
@@ -51,9 +47,9 @@ export async function collectMetrics(page: Page, testInfo: TestInfo) {
             const maxAttempts = 5;
 
             while (attempts < maxAttempts) {
-                await page.waitForTimeout(100);
+                await page.pause(100);
 
-                metrics = await page.evaluate(() => (window as any).__PERFORMANCE_METRICS__);
+                metrics = await page.execute(() => (window as any).__PERFORMANCE_METRICS__);
 
                 if (metrics.length > 0) {
                     break;
@@ -74,7 +70,7 @@ export async function collectMetrics(page: Page, testInfo: TestInfo) {
                         allMetrics: metrics,
                     },
                 };
-                (testInfo.annotations as PerformanceAnnotation[]).push(annotation);
+                await page.setMeta('annotations', [annotation]);
             }
         },
     };

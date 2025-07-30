@@ -1,5 +1,4 @@
 import baseConfig from '@gravity-ui/eslint-config';
-import a11yConfig from '@gravity-ui/eslint-config/a11y';
 import clientConfig from '@gravity-ui/eslint-config/client';
 import importOrderConfig from '@gravity-ui/eslint-config/import-order';
 import prettierConfig from '@gravity-ui/eslint-config/prettier';
@@ -26,10 +25,6 @@ export default defineConfig([
                 {
                     selector: "TSTypeReference>TSQualifiedName[left.name='React'][right.name='FC']",
                     message: "Don't use React.FC",
-                },
-                {
-                    selector: "ImportDeclaration[source.value='@testing-library/react']",
-                    message: "Please use wrapper from 'test-utils/utils.tsx'.",
                 },
             ],
             'jsx-a11y/no-autofocus': 'off',
