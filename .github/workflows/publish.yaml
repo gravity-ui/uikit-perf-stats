@@ -1,0 +1,115 @@
+name: Publish Results
+on:
+  push:
+    branches: [main, master]
+
+env:
+  REPEAT_EACH: 5 # Number of repetitions for each test
+
+jobs:
+  tests_with_10_nodes:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npm run playwright:install
+      - name: Run Playwright Tests
+        run: npm run playwright
+        env:
+          VITE_AVATAR_NODES_COUNT: 10 # Number of nodes for Avatar component
+          VITE_BUTTON_NODES_COUNT: 10 # Number of nodes for Button component
+          VITE_CHECKBOX_NODES_COUNT: 10 # Number of nodes for Checkbox component
+          VITE_LABEL_NODES_COUNT: 10 # Number of nodes for Label component
+          VITE_LINK_NODES_COUNT: 10 # Number of nodes for Link component
+          VITE_NUMBER_INPUT_NODES_COUNT: 10 # Number of nodes for NumberInput component
+          VITE_RADIO_GROUP_NODES_COUNT: 10 # Number of nodes for RadioGroup component
+          VITE_SWITCH_NODES_COUNT: 10 # Number of nodes for Switch component
+          VITE_TEXT_NODES_COUNT: 10 # Number of nodes for Text component
+          VITE_TEXT_INPUT_NODES_COUNT: 10 # Number of nodes for TextInput component
+          VITE_TEXT_AREA_NODES_COUNT: 10 # Number of nodes for TextArea component
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: test-results-10-nodes
+          path: ./playwright/test-results/
+          retention-days: 30
+
+  tests_with_100_nodes:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npm run playwright:install
+      - name: Run Playwright Tests
+        run: npm run playwright
+        env:
+          VITE_AVATAR_NODES_COUNT: 100 # Number of nodes for Avatar component
+          VITE_BUTTON_NODES_COUNT: 100 # Number of nodes for Button component
+          VITE_CHECKBOX_NODES_COUNT: 100 # Number of nodes for Checkbox component
+          VITE_LABEL_NODES_COUNT: 100 # Number of nodes for Label component
+          VITE_LINK_NODES_COUNT: 100 # Number of nodes for Link component
+          VITE_NUMBER_INPUT_NODES_COUNT: 100 # Number of nodes for NumberInput component
+          VITE_RADIO_GROUP_NODES_COUNT: 100 # Number of nodes for RadioGroup component
+          VITE_SWITCH_NODES_COUNT: 100 # Number of nodes for Switch component
+          VITE_TEXT_NODES_COUNT: 100 # Number of nodes for Text component
+          VITE_TEXT_INPUT_NODES_COUNT: 100 # Number of nodes for TextInput component
+          VITE_TEXT_AREA_NODES_COUNT: 100 # Number of nodes for TextArea component
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: test-results-100-nodes
+          path: ./playwright/test-results/
+          retention-days: 30
+
+  tests_with_1000_nodes:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npm run playwright:install
+      - name: Run Playwright Tests
+        run: npm run playwright
+        env:
+          VITE_AVATAR_NODES_COUNT: 1000 # Number of nodes for Avatar component
+          VITE_BUTTON_NODES_COUNT: 1000 # Number of nodes for Button component
+          VITE_CHECKBOX_NODES_COUNT: 1000 # Number of nodes for Checkbox component
+          VITE_LABEL_NODES_COUNT: 1000 # Number of nodes for Label component
+          VITE_LINK_NODES_COUNT: 1000 # Number of nodes for Link component
+          VITE_NUMBER_INPUT_NODES_COUNT: 1000 # Number of nodes for NumberInput component
+          VITE_RADIO_GROUP_NODES_COUNT: 1000 # Number of nodes for RadioGroup component
+          VITE_SWITCH_NODES_COUNT: 1000 # Number of nodes for Switch component
+          VITE_TEXT_NODES_COUNT: 1000 # Number of nodes for Text component
+          VITE_TEXT_INPUT_NODES_COUNT: 1000 # Number of nodes for TextInput component
+          VITE_TEXT_AREA_NODES_COUNT: 1000 # Number of nodes for TextArea component
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: test-results-1000-nodes
+          path: ./playwright/test-results/
+          retention-days: 30
+
+  publish:
+    timeout-minutes: 1
+    needs: [tests_with_10_nodes, tests_with_100_nodes, tests_with_1000_nodes]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stub For Publish
+        run: echo "Write Code For Publish Here"
