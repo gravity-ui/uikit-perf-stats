@@ -3,6 +3,7 @@ import {test} from '@playwright/experimental-ct-react';
 import {AntTextInput} from '../src/libs/antd/TextInput';
 import {GravityTextInput} from '../src/libs/gravity-ui/TextInput';
 import {MaterialTextInput} from '../src/libs/mui/TextInput';
+import {PrimereactTextInput} from '../src/libs/primereact/TextInput';
 import {ReactSpectrumTextInput} from '../src/libs/react-spectrum/TextInput';
 
 import {collectMetrics} from './utils/metrics';
@@ -35,6 +36,14 @@ test('TextInput React Spectrum', async ({mount, page}, testInfo) => {
     const metrics = await collectMetrics(page, testInfo);
 
     await mount(<ReactSpectrumTextInput />);
+
+    await metrics.finish();
+});
+
+test('TextInput PrimeReact', async ({mount, page}, testInfo) => {
+    const metrics = await collectMetrics(page, testInfo);
+
+    await mount(<PrimereactTextInput />);
 
     await metrics.finish();
 });

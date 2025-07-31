@@ -3,6 +3,7 @@ import {test} from '@playwright/experimental-ct-react';
 import {AntCheckbox} from '../src/libs/antd/Checkbox';
 import {GravityCheckbox} from '../src/libs/gravity-ui/Checkbox';
 import {MaterialCheckbox} from '../src/libs/mui/Checkbox';
+import {PrimereactCheckbox} from '../src/libs/primereact/Checkbox';
 import {ReactSpectrumCheckbox} from '../src/libs/react-spectrum/Checkbox';
 
 import {collectMetrics} from './utils/metrics';
@@ -35,6 +36,14 @@ test('Checkbox React Spectrum', async ({mount, page}, testInfo) => {
     const metrics = await collectMetrics(page, testInfo);
 
     await mount(<ReactSpectrumCheckbox />);
+
+    await metrics.finish();
+});
+
+test('Checkbox PrimeReact', async ({mount, page}, testInfo) => {
+    const metrics = await collectMetrics(page, testInfo);
+
+    await mount(<PrimereactCheckbox />);
 
     await metrics.finish();
 });

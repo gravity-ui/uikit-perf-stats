@@ -3,6 +3,7 @@ import {test} from '@playwright/experimental-ct-react';
 import {AntAvatar} from '../src/libs/antd/Avatar';
 import {GravityAvatar} from '../src/libs/gravity-ui/Avatar';
 import {MaterialAvatar} from '../src/libs/mui/Avatar';
+import {PrimereactAvatar} from '../src/libs/primereact/Avatar';
 import {ReactSpectrumAvatar} from '../src/libs/react-spectrum/Avatar';
 
 import {collectMetrics} from './utils/metrics';
@@ -35,6 +36,14 @@ test('Avatar React Spectrum', async ({mount, page}, testInfo) => {
     const metrics = await collectMetrics(page, testInfo);
 
     await mount(<ReactSpectrumAvatar />);
+
+    await metrics.finish();
+});
+
+test('Avatar PrimeReact', async ({mount, page}, testInfo) => {
+    const metrics = await collectMetrics(page, testInfo);
+
+    await mount(<PrimereactAvatar />);
 
     await metrics.finish();
 });
