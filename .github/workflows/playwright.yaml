@@ -17,11 +17,70 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npm run playwright:install
-      - name: Run Playwright tests
+      - name: Run Playwright tests - 10 nodes
         run: npm run playwright
+        env:
+          REPEAT_EACH: 5 # Number of repetitions for each test
+          VITE_AVATAR_NODES_COUNT: 10 # Number of nodes for Avatar component
+          VITE_BUTTON_NODES_COUNT: 10 # Number of nodes for Button component
+          VITE_CHECKBOX_NODES_COUNT: 10 # Number of nodes for Checkbox component
+          VITE_LABEL_NODES_COUNT: 10 # Number of nodes for Label component
+          VITE_LINK_NODES_COUNT: 10 # Number of nodes for Link component
+          VITE_NUMBER_INPUT_NODES_COUNT: 10 # Number of nodes for NumberInput component
+          VITE_RADIO_GROUP_NODES_COUNT: 10 # Number of nodes for RadioGroup component
+          VITE_SWITCH_NODES_COUNT: 10 # Number of nodes for Switch component
+          VITE_TEXT_NODES_COUNT: 10 # Number of nodes for Text component
+          VITE_TEXT_INPUT_NODES_COUNT: 10 # Number of nodes for TextInput component
+          VITE_TEXT_AREA_NODES_COUNT: 10 # Number of nodes for TextArea component
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: playwright-report
-          path: playwright-report/
+          name: test-results-10-nodes
+          path: playwright/test-results/
+          retention-days: 30
+      - name: Clear Playwright Cache
+        run: npm run playwright:clear-cache
+      - name: Run Playwright tests - 100 nodes
+        run: npm run playwright
+        env:
+          REPEAT_EACH: 5 # Number of repetitions for each test
+          VITE_AVATAR_NODES_COUNT: 100 # Number of nodes for Avatar component
+          VITE_BUTTON_NODES_COUNT: 100 # Number of nodes for Button component
+          VITE_CHECKBOX_NODES_COUNT: 100 # Number of nodes for Checkbox component
+          VITE_LABEL_NODES_COUNT: 100 # Number of nodes for Label component
+          VITE_LINK_NODES_COUNT: 100 # Number of nodes for Link component
+          VITE_NUMBER_INPUT_NODES_COUNT: 100 # Number of nodes for NumberInput component
+          VITE_RADIO_GROUP_NODES_COUNT: 100 # Number of nodes for RadioGroup component
+          VITE_SWITCH_NODES_COUNT: 100 # Number of nodes for Switch component
+          VITE_TEXT_NODES_COUNT: 100 # Number of nodes for Text component
+          VITE_TEXT_INPUT_NODES_COUNT: 100 # Number of nodes for TextInput component
+          VITE_TEXT_AREA_NODES_COUNT: 100 # Number of nodes for TextArea component
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: test-results-100-nodes
+          path: playwright/test-results/
+          retention-days: 30
+      - name: Clear Playwright Cache
+        run: npm run playwright:clear-cache
+      - name: Run Playwright tests - 1000 nodes
+        run: npm run playwright
+        env:
+          REPEAT_EACH: 5 # Number of repetitions for each test
+          VITE_AVATAR_NODES_COUNT: 1000 # Number of nodes for Avatar component
+          VITE_BUTTON_NODES_COUNT: 1000 # Number of nodes for Button component
+          VITE_CHECKBOX_NODES_COUNT: 1000 # Number of nodes for Checkbox component
+          VITE_LABEL_NODES_COUNT: 1000 # Number of nodes for Label component
+          VITE_LINK_NODES_COUNT: 1000 # Number of nodes for Link component
+          VITE_NUMBER_INPUT_NODES_COUNT: 1000 # Number of nodes for NumberInput component
+          VITE_RADIO_GROUP_NODES_COUNT: 1000 # Number of nodes for RadioGroup component
+          VITE_SWITCH_NODES_COUNT: 1000 # Number of nodes for Switch component
+          VITE_TEXT_NODES_COUNT: 1000 # Number of nodes for Text component
+          VITE_TEXT_INPUT_NODES_COUNT: 1000 # Number of nodes for TextInput component
+          VITE_TEXT_AREA_NODES_COUNT: 1000 # Number of nodes for TextArea component
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: test-results-1000-nodes
+          path: playwright/test-results/
           retention-days: 30
